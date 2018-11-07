@@ -1,0 +1,25 @@
+{
+  "name": "sequelize-test",
+  "version": "1.0.0",
+  "description": "Testes com Sequelize",
+  "main": "index.js",
+  "dialect": "mssql",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/alinessilva/sequelize-test.git)"
+  },
+  "keywords": [
+    "sequelize",
+    "node"
+  ],
+  "author": "Aline Silva <alinedoze@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^1.6.3",
+    "sequelize": "^4.41.0",
+    "tedious": "^3.0.1"
+  }
+}
