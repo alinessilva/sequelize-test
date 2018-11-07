@@ -17,9 +17,15 @@ var Article = connection.define('article', {
   body: Sequelize.TEXT
 });
 
-connection.sync().then(function(){
-  Article.create({
-    title: 'demo title',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam vero.'
+// connection.sync().then(function(){
+//   Article.create({
+//     title: 'demo title',
+//     body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam vero.'
+//   });
+// });
+
+connection.sync().then(function() {
+  Article.findById(1).then(function(article) {
+    console.log(article.dataValues)
   });
 });
