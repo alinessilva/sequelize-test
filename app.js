@@ -17,4 +17,9 @@ var Article = connection.define('article', {
   body: Sequelize.TEXT
 });
 
-connection.sync()
+connection.sync().then(function(){
+  Article.create({
+    title: 'demo title',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam vero.'
+  });
+});
