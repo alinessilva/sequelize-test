@@ -24,8 +24,14 @@ var Article = connection.define('article', {
 //   });
 // });
 
+// connection.sync().then(function() {
+//   Article.findById(1).then(function(article) {
+//     console.log(article.dataValues)
+//   });
+// });
+
 connection.sync().then(function() {
-  Article.findById(1).then(function(article) {
-    console.log(article.dataValues)
+  Article.findAll().then(function(articles) {
+    console.log(articles.length);
   });
 });
