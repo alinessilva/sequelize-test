@@ -22,7 +22,9 @@ var Article = connection.define('article', {
       type: Sequelize.TEXT
   }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
+
 });
 
 connection.sync({
