@@ -13,6 +13,10 @@ const connection = new Sequelize('POC', 'sa', 'w551100W#', {
 });
 
 var Article = connection.define('article', {
+  slug: {
+    type: Sequelize.STRING,
+    primaryKey: true
+  },
   title: {
     type: Sequelize.STRING,
     unique: true,
@@ -23,8 +27,6 @@ var Article = connection.define('article', {
   }
 }, {
     timestamps: false,
-    freezeTableName: true
-
 });
 
 connection.sync({
