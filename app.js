@@ -12,7 +12,7 @@ const connection = new Sequelize('POC', 'sa', 'w551100W#', {
     },
 });
 
-var Article = connection.define('article', {
+const Article = connection.define('article', {
   slug: {
     type: Sequelize.STRING,
     primaryKey: true
@@ -28,8 +28,17 @@ var Article = connection.define('article', {
       }
     }
   },
-    body: {
-      type: Sequelize.TEXT
+  body: {
+    type: Sequelize.TEXT,
+    validate: {
+      startsWithUpper: function(bodyVal) {
+        const first = bodyVal.charAt(0);
+        const startsWithUpper = first === first.toUpperCase();
+        if (!startsWithUpper) {
+          throw new Error('First letter must be a uppercase caracter.')
+        }
+      }
+    }
   }
 }, {
     timestamps: false,
@@ -42,11 +51,10 @@ connection
   })
   .then(function() {
     return Article.create({
-      title: 'foo',
+      title: 'Lorem Ipsum',
       slug: '1',
-      body: 'Lorem'
+      body: 'lorem'
     })
-
   })
   .catch(function(error) {
     console.log(error);
