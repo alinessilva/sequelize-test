@@ -20,7 +20,13 @@ var Article = connection.define('article', {
   title: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      len: {
+        args: [10, 150],
+        msg: 'Please enter a title with at least 10 chars but no more than 150'
+      }
+    }
   },
     body: {
       type: Sequelize.TEXT
@@ -29,12 +35,22 @@ var Article = connection.define('article', {
     timestamps: false,
 });
 
-connection.sync({
-  force: true,
-  logging: console.log
-}).then(function() {
+connection
+  .sync({
+    force: true,
+    logging: console.log
+  })
+  .then(function() {
+    return Article.create({
+      title: 'foo',
+      slug: '1',
+      body: 'Lorem'
+    })
 
-})
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
 
 // connection.sync().then(function(){
 //   Article.create({
