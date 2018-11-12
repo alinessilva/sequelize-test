@@ -17,43 +17,43 @@ const Article = connection.define('article', {
     type: Sequelize.STRING,
     primaryKey: true
   },
-  title: {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      len: {
-        args: [10, 150],
-        msg: 'Please enter a title with at least 10 chars but no more than 150'
-      }
-    }
-  },
-  body: {
-    type: Sequelize.TEXT,
-    validate: {
-      startsWithUpper: function(bodyVal) {
-        const first = bodyVal.charAt(0);
-        const startsWithUpper = first === first.toUpperCase();
-        if (!startsWithUpper) {
-          throw new Error('First letter must be a uppercase caracter.')
-        }
-      }
+  title: Sequelize.STRING,
+  body: Sequelize.TEXT,
+}, {
+  hooks: {
+    beforeValidate: (article, options) => {
+      article.title = 'Some article';
+    },
+    afterValidate: (article, options) => {
+      article.body = 'Some name';
     }
   }
-}, {
-    timestamps: false,
 });
+//     hooks: {
+//       beforeValidate: function() {
+//         console.log('beforeValidate');
+//       },
+//     afterValidate: function() {
+//         console.log('afterValidate');
+//     },
+//     beforeCreate: function() {
+//       console.log('beforeCreate');
+//     },
+//     afterCreate: function() {
+//       console.log('afterCreate');
+//     }
+//   }
+// });
 
 connection
   .sync({
     force: true,
-    logging: console.log
   })
   .then(function() {
-    return Article.create({
-      title: 'Lorem Ipsum',
-      slug: '1',
-      body: 'lorem'
+    Article.create({
+      slug: 'some-slug',
+      title: 'Some-title',
+      body: 'some-body'
     })
   })
   .catch(function(error) {
